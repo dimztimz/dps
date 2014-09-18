@@ -14,7 +14,7 @@
 % odnosno digitalna obicna freq od k/N (1/primerok).
 % matircata se dobiva so slednava komanda
 
-pkg load signal
+pkg load signal;
 N = 1000;
 WN = dftmtx(N);
 
@@ -35,3 +35,25 @@ WN = exp(-i*2*pi/N*([0:N-1]' * [0:N-1]));
 iWN = exp(+i*2*pi/N*([0:N-1]' * [0:N-1]))/N;
 
 
+% del 3 Magnitude and phase
+pkg load signal;
+x = [ones(1,64) zeros(1,64)]; %edinecen skok
+figure;
+stem(x);
+N = 128;
+W128 = dftmtx(N);
+X = x * W128;
+
+%magnituda
+stem(abs(X)); 
+stem((1:N)/N,abs(X)); 
+plot((1:N)/N,abs(X));
+
+%faza so numericki greski vo neparnite primeroci
+stem((1:N)/N,angle(X));
+stem((1:N)/N*2*pi,angle(X));
+
+%inverzna
+xx = real(X*conj(W128)/N);
+
+%del 4 Role of the fourier transform, two birds
